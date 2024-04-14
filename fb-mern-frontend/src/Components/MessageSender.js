@@ -1,23 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Input from "@mui/material/Input";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../config"; // Import the auth object from your config file
+import { getStorage, ref, getDownloadURL } from "firebase/storage"; // Import storage methods from Firebase Storage
 import "./MessageSender.css";
 import VideocamIcon from '@mui/icons-material/Videocam';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
-// import UploadIcon from '@mui/icons-material/Upload';
-
 const MessageSender = () => {
   const [input, setInput] = useState("");
   const [image, setImage] = useState(null);
+  const [avatarSrc, setAvatarSrc] = useState("");
+  const [user] = useAuthState(auth); // Get the user object from Firebase Auth
 
-  const handelChange = (e) => {
+  useEffect(() => {
+    const getUserProfilePicture = async () => {
+      if (user && user.photoURL) {
+        setAvatarSrc(user.photoURL); // If user has a photoURL set, use it as the avatar
+      } else {
+        // If user does not have a photoURL set, check if there's an uploaded profile picture in storage
+        const storage = getStorage(); // Initialize Firebase Storage
+        const storageRef = ref(storage, `profile_photos/${user.uid}`);
+        try {
+          const url = await getDownloadURL(storageRef);
+          setAvatarSrc(url);
+        } catch (error) {
+          console.error("Error getting profile picture:", error.message);
+        }
+      }
+    };
+
+    getUserProfilePicture();
+  }, [user]);
+
+  const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
   };
-  const handelSubmit = () => {
+
+  const handleSubmit = () => {
     console.log("Submitted");
   };
 
@@ -25,7 +49,7 @@ const MessageSender = () => {
     <div>
       <div className="messageSender">
         <div className="messageSender_top">
-          <Avatar src="https://i.postimg.cc/bYbkxrCv/325969602-486892903645177-3488390653583921065-n.jpg" />
+          <Avatar src={avatarSrc} />
 
           <form>
             <input
@@ -38,9 +62,9 @@ const MessageSender = () => {
             <Input
               type="file"
               className="messageSender__fileSelector"
-              onChange={handelChange}
+              onChange={handleChange}
             />
-            <button onClick={handelSubmit} type="submit">
+            <button onClick={handleSubmit} type="submit">
               Hidden Submit
             </button>
           </form>
@@ -48,7 +72,6 @@ const MessageSender = () => {
       </div>
 
       <div className="messageSender__bottom">
-      
         <div className="messageSender__option">
           <VideocamIcon style={{ color: "red" }} /> <h3>Live Video</h3>
         </div>

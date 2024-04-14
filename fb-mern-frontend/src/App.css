@@ -1,7 +1,113 @@
-.app{
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* * {
   background-color: #f1f2f5;
-}
-.app__body{
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+} */
+.app__body {
   display: flex;
   justify-content: space-evenly;
+}
+/* Basic styling for the login container */
+.Facebooklogo > img {
+  display: block;
+  width: 25rem;
+  margin: 5rem auto 0rem auto;
+}
+.container {
+  /* font-family: "Poppins", sans-serif; */
+  font-weight: 600;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+/* Styling for inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+  display: flex;
+  width: 96%;
+align-items: center;
+  /* font-weight: 600; */
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 16px;
+}
+
+.xyz {
+  display: flex;
+  width: 96%;
+  margin: auto;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(37 99 235); /* Facebook blue */
+  color: #fff;
+  cursor: pointer;
+}
+
+.xyz:hover {
+  background-color: rgb(
+    16,
+    74,
+    199
+  ); /* Darker shade of Facebook blue on hover */
+}
+
+/* Styling for error message */
+.error {
+  color: red;
+}
+
+/* Styling for profile picture preview */
+.preview {
+  max-width: 100px;
+  max-height: 100px;
+  margin-bottom: 10px;
+}
+.PText {
+  background-color: white;
+}
+
+/* Styling for switch button */
+.switch-button {
+  text-align: center;
+}
+
+/* Styling for Google sign-in button */
+.google-button {
+  background-color: #db4437; /* Google red */
+}
+
+.google-button:hover {
+  background-color: #c13505; /* Darker shade of Google red on hover */
+}
+
+.google > img {
+  width: 30px;
+  background-color: rgb(37 99 235);
+}
+.google:hover > img {
+  background-color: rgb(16, 74, 199);
+}
+.togel--button {
+  background-color: #42b72a;
+}
+.togel--button:hover {
+  background-color: #37aa20;
 }

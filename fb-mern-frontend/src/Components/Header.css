@@ -59,6 +59,7 @@
 
 .header__option > i {
   color: grey;
+  font-size: large;
 }
 .header__option > img {
     height: 40px;

@@ -7,7 +7,7 @@ import Grid from "gridfs-stream";
 import bodyParser from "body-parser";
 import path from "path";
 import Pusher from "pusher";
-import mongoPosts from "./postModel.js";
+import mongoPosts from "./mongoPosts.js";
 
 Grid.mongo = mongoose.mongo;
 
@@ -88,7 +88,7 @@ app.get("/retrieve/posts", (req, res) => {
       data.sort((b, a) => {
         return a.timestamp - b.timestamp;
       });
-      res.status(200).send(data);
+      res.status(200).send(data); 
     }
   });
 });
@@ -108,6 +108,6 @@ app.get("/retrieve/images/single", (req, res) => {
   });
 });
 
-//listen\
+//listen
 
 app.listen(port, () => console.log(`Listening on loacalHost : ${port}`));

@@ -7,4 +7,4 @@ const postModel= mongoose.Schema({
     timestamp:String
 })
 
-export default mongoose.model('posts', postModel)
+export default mongoose.model('posts', postModel) 
