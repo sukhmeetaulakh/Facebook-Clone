@@ -6,22 +6,20 @@ import { GridFsStorage } from "multer-gridfs-storage";
 import Grid from "gridfs-stream";
 import bodyParser from "body-parser";
 import path from "path";
-import Pusher from "pusher";
-import mongoPosts from "./mongoPosts.js";
+// import Pusher from "pusher";
+import Post from "./models/Post.js"; // Import the Post model
 
 Grid.mongo = mongoose.mongo;
 
-//app config
-
+// App config
 const app = express();
 const port = process.env.PORT || 9000;
 
-//middelware
-
+// Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-//dbconfig
+// DB config
 const mongoURI =
   "mongodb+srv://usernew:YwpmyXKhmZwNSdBn@cluster0.bjoteml.mongodb.net/facebook-clone";
 
@@ -60,18 +58,31 @@ mongoose.connect(mongoURI, {
   useUnifiedTopology: true,
 });
 
-// api routes
+// Define a route to retrieve posts from the database
+app.get("/retrieve/posts", async (req, res) => {
+  try {
+    // Fetch posts from the database
+    const posts = await Post.find().sort({ timestamp: -1 });
 
-app.get("/", (req, res) => res.status(200).send("SatSriAkalJiSareaaNu!!"));
+    // Send the retrieved posts as a response
+    res.status(200).json(posts);
+  } catch (error) {
+    // Handle errors
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
+// Define a route to upload an image
 app.post("/upload/image", upload.single("file"), (req, res) => {
   res.status(201).send(req.file);
 });
 
+// Define a route to upload a post
 app.post("/upload/post", (req, res) => {
   const dbPost = req.body;
   console.log(dbPost);
-  mongoPosts.create(dbPost, (err, data) => {
+  Post.create(dbPost, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -80,19 +91,7 @@ app.post("/upload/post", (req, res) => {
   });
 });
 
-app.get("/retrieve/posts", (req, res) => {
-  mongoPosts.find((err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      data.sort((b, a) => {
-        return a.timestamp - b.timestamp;
-      });
-      res.status(200).send(data); 
-    }
-  });
-});
-
+// Define a route to retrieve a single image
 app.get("/retrieve/images/single", (req, res) => {
   gfs.files.findOne({ filename: req.query.name }, (err, file) => {
     if (err) {
@@ -108,6 +107,5 @@ app.get("/retrieve/images/single", (req, res) => {
   });
 });
 
-//listen
-
-app.listen(port, () => console.log(`Listening on loacalHost : ${port}`));
+// Listen
+app.listen(port, () => console.log(`Listening on localhost:${port}`));
