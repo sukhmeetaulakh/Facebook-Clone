@@ -42,29 +42,30 @@ const SidebarRow = () => {
           <img src={profilePic} alt="Profile" />
           <p>{userName}</p>
         </div>
-        <div className="sidebarRow__item">
-          <i className="fa-solid fa-hospital"></i>
-          <p>Covid 19 Info Center</p>
+        <div className="sidebarRow__item" >
+        <i class="fa-solid fa-earth-americas"></i>
+         <a href="https://www.facebook.com/climatescienceinfo/" target="_blank"><p>Climate Sci-Center</p></a>
         </div>
         <div className="sidebarRow__item">
           <i className="fa-solid fa-flag"></i>
-          <p>Pages</p>
+          <a href="https://www.facebook.com/pages/" target="_blank"><p>Pages</p></a>
         </div>
         <div className="sidebarRow__item">
-          <i className="fa-solid fa-user-group"></i>
-          <p>Friends</p>
+        <i class="fa-solid fa-gamepad"></i>
+        <a href="https://www.facebook.com/gaming/play/" target="_blank"><p>Games</p></a>
         </div>
         <div className="sidebarRow__item">
-          <i className="fa-brands fa-facebook-messenger"></i>
-          <p>Messenger</p>
+        <i class="fa-solid fa-video"></i>
+        <a href="https://www.facebook.com/gaming/" target="_blank"><p>Live </p></a>
+     
         </div>
         <div className="sidebarRow__item">
           <i className="fa-solid fa-store"></i>
-          <p>Marketplace</p>
+          <a href="https://www.facebook.com/marketplace/" target="_blank"><p>Marketplace</p></a>
         </div>
         <div className="sidebarRow__item">
-          <i className="fa-solid fa-video"></i>
-          <p>Videos</p>
+        <i class="fa-solid fa-filter-circle-dollar"></i>
+        <a href="https://www.facebook.com/fundraisers/explore/" target="_blank"><p>Fundraiser</p></a>
         </div>
       </div>
     </div>

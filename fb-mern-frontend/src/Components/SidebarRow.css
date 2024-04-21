@@ -19,7 +19,9 @@
   height: 40px;
   border-radius: 50%;
 }
-.sidebarRow__item > p {
+.sidebarRow__item > p , .sidebarRow__item > a{
+  color:black;
+  text-decoration: none;
   margin-left: 20px;
   font-weight: 600;
   margin-left: 10px;
